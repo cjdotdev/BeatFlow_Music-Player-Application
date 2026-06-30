@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Music Player - Tasks</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: system-ui, -apple-system, sans-serif; background: #0f0f13; color: #e1e1e6; padding: 2rem; }
+  h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 1.5rem; color: #f0f0f5; }
+  h2 { font-size: 1.1rem; font-weight: 500; margin: 2rem 0 0.75rem; color: #a1a1aa; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; font-size: 0.875rem; }
+  th, td { text-align: left; padding: 0.6rem 0.75rem; border-bottom: 1px solid #27272a; }
+  th { font-weight: 600; color: #a1a1aa; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  td:first-child, th:first-child { width: 3rem; text-align: center; }
+  td:nth-child(3), th:nth-child(3) { width: 8rem; }
+  td:last-child, th:last-child { width: 7rem; text-align: center; }
+  tr:hover { background: #1a1a20; }
+  .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.75rem; font-weight: 500; }
+  .badge.setup { background: #1a1a2e; color: #818cf8; }
+  .badge.arch { background: #1a2e1a; color: #4ade80; }
+  .badge.data { background: #2e1a1a; color: #fb7185; }
+  .badge.repo { background: #2e2e1a; color: #facc15; }
+  .badge.audio { background: #1a2e2e; color: #22d3ee; }
+  .badge.logic { background: #2e1a2e; color: #c084fc; }
+  .badge.test { background: #1a1a1a; color: #a1a1aa; }
+  .badge.ui { background: #1e293b; color: #60a5fa; }
+  .badge.critique { background: #2e1a1a; color: #fb7185; }
+  .badge.bonus { background: #1a2e1a; color: #4ade80; }
+  .badge.sm { font-size: 0.65rem; padding: 0.15rem 0.5rem; }
+  .status { display: inline-block; padding: 0.15rem 0.6rem; border-radius: 999px; font-size: 0.75rem; }
+  .status.todo { background: #27272a; color: #a1a1aa; }
+</style>
+</head>
+<body>
+
+<h1>Music Player — Tasks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Tâche</th>
+      <th>Catégorie</th>
+      <th>Statut</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>01</td><td>Init projet + flutter_native_splash + clean main.dart</td><td><span class="badge setup">Setup</span></td><td><span class="status todo">À faire</span></td></tr>
+    <tr><td>02</td><td>Pubspec : isar, just_audio, audio_service, flutter_bloc</td><td><span class="badge setup">Setup</span></td><td><span class="status todo">À faire</span></td></tr>
+    <tr><td>03</td><td>Arborescence (data, logic, presentation, services)</td><td><span class="badge arch">Architecture</span></td><td><span class="status todo">À faire</span></td></tr>
+    <tr><td>04</td><td>Modèles : Song & Playlist (Annotations Isar)</td><td><span class="badge data">Données</span></td><td><span class="status todo">À faire</span></td></tr>
+    <tr><td>05</td><td>build_runner : générer les fichiers Isar</td><td><span class="badge data">Données</span></td><td><span class="status todo">À faire</span></td></tr>
+    <tr><td>06</td><td>Service de scan (parcours fichiers + injection Isar)</td><td><span class="badge data">Données</span></td><td><span class="status todo">À faire</span></td></tr>
+    <tr><td>07</td><td>MusicRepository (Getters propres, CRUD Playlist)</td><td><span class="badge repo">Repo</span></td><td><span class="status todo">À faire</span></td></tr>
+    <tr><td>08</td><td>Tests unitaires Data (Scan + CRUD) + validation Isar</td><td><span class="badge test">Test</span></td><td><span class="status todo">À faire</span></td></tr>
+    <tr><td>09</td><td>AudioHandler : configurer BaseAudioHandler</td><td><span class="badge audio">Audio</span></td><td><span class="status todo">À faire</span></td></tr>
+    <tr><td>10</td><td>PlayerCubit : logique de lecture (Play/Pause/Next)</td><td><span class="badge logic">Logic</span></td><td><span class="status todo">À faire</span></td></tr>
+    <tr><td>11</td><td>PermissionsCubit : gérer l'accès aux fichiers</td><td><span class="badge logic">Logic</span></td><td><span class="status todo">À faire</span></td></tr>
+    <tr><td>12</td><td>Tests Cubit (Validation états de lecture)</td><td><span class="badge test">Test</span></td><td><span class="status todo">À faire</span></td></tr>
+    <tr><td>13</td><td>Page Onboarding + Permission Gate</td><td><span class="badge ui">UI</span></td><td><span class="status todo">À faire</span></td></tr>
+    <tr><td>14</td><td>MainScaffold : BottomNav + IndexedStack (Persistance)</td><td><span class="badge ui">UI</span></td><td><span class="status todo">À faire</span></td></tr>
+    <tr><td>15</td><td>Implémentation : Home (Liste chansons)</td><td><span class="badge ui">UI</span></td><td><span class="status todo">À faire</span></td></tr>
+    <tr><td>16</td><td>Implémentation : Playlists & Historique (Requêtes Isar)</td><td><span class="badge ui">UI</span></td><td><span class="status todo">À faire</span></td></tr>
+    <tr><td>17</td><td>Mini-Player (Widget flottant, écoute PlayerCubit)</td><td><span class="badge ui">UI</span></td><td><span class="status todo">À faire</span></td></tr>
+    <tr><td>18</td><td>Now Playing (Ecran plein écran, animation)</td><td><span class="badge ui">UI</span></td><td><span class="status todo">À faire</span></td></tr>
+    <tr><td>19</td><td>Test : Cycle de vie (Kill app -> Audio continue)</td><td><span class="badge critique">Critique</span></td><td><span class="status todo">À faire</span></td></tr>
+    <tr><td>20</td><td>Test : Background (Notification/Lockscreen)</td><td><span class="badge critique">Critique</span></td><td><span class="status todo">À faire</span></td></tr>
+    <tr><td>21</td><td>README : Instructions build + explication architecture</td><td><span class="badge bonus">Bonus</span></td><td><span class="status todo">À faire</span></td></tr>
+  </tbody>
+</table>
+
+<p style="color: #52525b; font-size: 0.8rem;">tasks.html — ad-free music player</p>
+
+</body>
+</html>

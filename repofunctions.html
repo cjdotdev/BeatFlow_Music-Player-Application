@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Music Player - Repository Functions</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: system-ui, -apple-system, sans-serif; background: #0f0f13; color: #e1e1e6; padding: 2rem; }
+  h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: 1.5rem; color: #f0f0f5; }
+  p.desc { color: #a1a1aa; margin-bottom: 1.5rem; font-size: 0.9rem; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; font-size: 0.875rem; }
+  th, td { text-align: left; padding: 0.6rem 0.75rem; border-bottom: 1px solid #27272a; }
+  th { font-weight: 600; color: #a1a1aa; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  th:nth-child(2), td:nth-child(2) { width: 18rem; }
+  th:nth-child(3), td:nth-child(3) { width: 10rem; }
+  tr:hover { background: #1a1a20; }
+  code { background: #18181b; padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.82rem; color: #f0f0f5; }
+  .badge { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.7rem; font-weight: 500; }
+  .badge.orch { background: #2e2e1a; color: #facc15; }
+  .badge.data { background: #2e1a1a; color: #fb7185; }
+  .badge.meta { background: #1a1a2e; color: #818cf8; }
+  .badge.playlist { background: #1a2e1a; color: #4ade80; }
+  .badge.fav { background: #2e1a2e; color: #c084fc; }
+  .badge.hist { background: #1e293b; color: #60a5fa; }
+  .badge.new { background: #1a2e2e; color: #22d3ee; }
+  .tag { display: inline-block; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.65rem; font-weight: 600; margin-left: 0.4rem; }
+  .tag.new { background: #22d3ee22; color: #22d3ee; }
+</style>
+</head>
+<body>
+
+<h1>MusicPlayer — Repository Functions</h1>
+<p class="desc">Complete API surface of <code>MusicRepository</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Catégorie</th>
+      <th>Fonction</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="badge orch">Orchestration</span></td>
+      <td><code>performFullScan()</code></td>
+      <td><code>Future<void></code></td>
+      <td>Scanne tous les fichiers audio et les enregistre dans Isar</td>
+    </tr>
+    <tr>
+      <td><span class="badge orch">Orchestration</span></td>
+      <td><code>syncLibrary()</code> <span class="tag new">NEW</span></td>
+      <td><code>Future<void></code></td>
+      <td>Détection incrémentale : nouveaux fichiers et fichiers supprimés</td>
+    </tr>
+    <tr>
+      <td><span class="badge data">Lecture Data</span></td>
+      <td><code>getAllSongs()</code></td>
+      <td><code>Stream<List<Song>></code></td>
+      <td>Liste complète de la bibliothèque, mise à jour automatique</td>
+    </tr>
+    <tr>
+      <td><span class="badge data">Lecture Data</span></td>
+      <td><code>getSongsInFolder(String path)</code></td>
+      <td><code>Stream<List<Song>></code></td>
+      <td>Filtre les chansons pour une vue Dossiers spécifique</td>
+    </tr>
+    <tr>
+      <td><span class="badge data">Lecture Data</span></td>
+      <td><code>getSongById(int id)</code></td>
+      <td><code>Future<Song?></code></td>
+      <td>Récupère une chanson précise pour lancer la lecture</td>
+    </tr>
+    <tr>
+      <td><span class="badge data">Lecture Data</span></td>
+      <td><code>searchSongs(String query)</code> <span class="tag new">NEW</span></td>
+      <td><code>Stream<List<Song>></code></td>
+      <td>Recherche par titre ou artiste</td>
+    </tr>
+    <tr>
+      <td><span class="badge meta">Lecture Meta</span></td>
+      <td><code>getFoldersWithSongs()</code></td>
+      <td><code>Future<List<String>></code></td>
+      <td>Liste des dossiers contenant au moins une chanson (pour UI)</td>
+    </tr>
+    <tr>
+      <td><span class="badge playlist">Playlists</span></td>
+      <td><code>createPlaylist(String name)</code></td>
+      <td><code>Future<void></code></td>
+      <td>Crée une nouvelle playlist</td>
+    </tr>
+    <tr>
+      <td><span class="badge playlist">Playlists</span></td>
+      <td><code>deletePlaylist(int id)</code> <span class="tag new">NEW</span></td>
+      <td><code>Future<void></code></td>
+      <td>Supprime une playlist et ses liaisons</td>
+    </tr>
+    <tr>
+      <td><span class="badge playlist">Playlists</span></td>
+      <td><code>getAllPlaylists()</code></td>
+      <td><code>Stream<List<Playlist>></code></td>
+      <td>Liste de toutes les playlists créées</td>
+    </tr>
+    <tr>
+      <td><span class="badge playlist">Playlists</span></td>
+      <td><code>getSongsByPlaylistId(int id)</code> <span class="tag new">NEW</span></td>
+      <td><code>Stream<List<Song>></code></td>
+      <td>Chansons appartenant à une playlist spécifique</td>
+    </tr>
+    <tr>
+      <td><span class="badge playlist">Playlists</span></td>
+      <td><code>addSongToPlaylist(int pId, int sId)</code></td>
+      <td><code>Future<void></code></td>
+      <td>Ajoute une chanson à une playlist</td>
+    </tr>
+    <tr>
+      <td><span class="badge playlist">Playlists</span></td>
+      <td><code>removeSongFromPlaylist(int pId, int sId)</code> <span class="tag new">NEW</span></td>
+      <td><code>Future<void></code></td>
+      <td>Retire une chanson d'une playlist</td>
+    </tr>
+    <tr>
+      <td><span class="badge fav">Favoris</span></td>
+      <td><code>toggleFavorite(int songId)</code></td>
+      <td><code>Future<void></code></td>
+      <td>Bascule l'état favori d'une chanson</td>
+    </tr>
+    <tr>
+      <td><span class="badge fav">Favoris</span></td>
+      <td><code>isFavorite(int songId)</code> <span class="tag new">NEW</span></td>
+      <td><code>Future<bool></code></td>
+      <td>Vérifie si une chanson est en favoris</td>
+    </tr>
+    <tr>
+      <td><span class="badge fav">Favoris</span></td>
+      <td><code>getFavoriteSongs()</code> <span class="tag new">NEW</span></td>
+      <td><code>Stream<List<Song>></code></td>
+      <td>Liste des chansons favorites</td>
+    </tr>
+    <tr>
+      <td><span class="badge hist">Historique</span></td>
+      <td><code>updateLastPlayed(int songId)</code> <span class="tag new">NEW</span></td>
+      <td><code>Future<void></code></td>
+      <td>Met à jour <code>lastPlayed</code> et incrémente <code>playCount</code></td>
+    </tr>
+    <tr>
+      <td><span class="badge hist">Historique</span></td>
+      <td><code>getHistory()</code> <span class="tag new">NEW</span></td>
+      <td><code>Stream<List<Song>></code></td>
+      <td>Chansons triées par <code>lastPlayed</code> décroissant</td>
+    </tr>
+  </tbody>
+</table>
+
+<p style="color: #52525b; font-size: 0.8rem;">
+  <span class="tag new">NEW</span> = ajouté par rapport à la version initiale — functions.html
+</p>
+
+</body>
+</html>
